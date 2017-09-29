@@ -1,0 +1,15 @@
+{
+  "name": "@infosites/infosites-aws-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "InfoSites <suporte@infosites.com.br> (http://www.infosites.com.br)",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.124.0",
+    "bluebird": "^3.5.0"
+  }
+}
