@@ -22,4 +22,16 @@ exports.getSignedUrl = function (bucket, key, contentType, contentLength) {
     return s3.getSignedUrl('putObject', params)
 }
 
+exports.putJson = function (bucket, key, json) {
+    var params = {
+        Bucket: bucket,
+        Key:  key,
+        Body: JSON.stringify(json),
+        ContentType: 'application/json',
+        ACL: 'public-read'
+    }
+
+    return s3.putObjectAsync(params)
+}
+
 module.exports = exports;
