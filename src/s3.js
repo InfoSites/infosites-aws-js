@@ -43,12 +43,12 @@ exports.putJson = function (bucket, key, json) {
     return s3.putObjectAsync(params)
 }
 
-exports.putFile = function (bucket, key, file, contentFile) {
+exports.putFile = function (bucket, key, file, contentType) {
     var params = {
         Bucket: bucket,
         Key:  key,
         Body: file,
-        ContentType: contentFile,
+        ContentType: contentType,
         ACL: 'public-read'
     }
 
