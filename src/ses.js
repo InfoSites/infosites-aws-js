@@ -11,12 +11,8 @@ var overwrite = process.env.EMAIL_OVERWRITE
 exports.send = function( _from, to, bcc, replyTo, subject, body ) {
     var params = {
         Destination: {
-            BccAddresses: [
-                bcc
-            ],
-            ToAddresses: [
-                to
-            ]
+            BccAddresses: bcc,
+            ToAddresses: to
         },
         Message: {
             Body: {
