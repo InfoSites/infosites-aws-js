@@ -1,14 +1,12 @@
-var AWS = require('aws-sdk')
-var Promise = require('bluebird')
-
-var ses = new AWS.SES({apiVersion: '2010-12-01'})
-Promise.promisifyAll( ses )
+var ses = require('./wrappers/sesWrapper')
 
 var exports = {}
 
-var overwrite = process.env.EMAIL_OVERWRITE
-
 exports.send = function( _from, to, bcc, replyTo, subject, body ) {
+    var config = require('config')
+
+    var overwrite = process.env.EMAIL_OVERWRITE || (config.has('email.emailOverwrite') && config.get('email.emailOverwrite'))
+
     var params = {
         Destination: {
             BccAddresses: bcc,
