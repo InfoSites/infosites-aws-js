@@ -32,7 +32,7 @@ exports.send = function( _from, to, bcc, replyTo, subject, body ) {
 
     if (overwrite) params.Destination = { ToAddresses: [ overwrite ] }
 
-    return ses.sendEmailAsync(params)
+    return ses.sendEmail(params).promise()
 }
 
 module.exports = exports
