@@ -1,12 +1,10 @@
 'use strict'
 
 var AWS = require('aws-sdk')
-var Promise = require('bluebird')
 
 var s3 = new AWS.S3({
     signatureVersion: 'v4'
 });
-Promise.promisifyAll( s3 );
 
 var exports = {};
 
@@ -28,7 +26,7 @@ exports.getObject = function (bucket, key) {
         Key:  key
     }
 
-    return s3.getObjectAsync(params)
+    return s3.getObject(params).promise()
 }
 
 exports.putJson = function (bucket, key, json) {
@@ -40,7 +38,7 @@ exports.putJson = function (bucket, key, json) {
         ACL: 'public-read'
     }
 
-    return s3.putObjectAsync(params)
+    return s3.putObject(params).promise()
 }
 
 exports.putFile = function (bucket, key, file, contentType) {
@@ -52,7 +50,7 @@ exports.putFile = function (bucket, key, file, contentType) {
         ACL: 'public-read'
     }
 
-    return s3.putObjectAsync(params)
+    return s3.putObject(params).promise()
 }
 
 module.exports = exports;
