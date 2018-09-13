@@ -4,7 +4,6 @@ var Promise = require('bluebird');
 var utils = require('./utils')
 
 var db = new AWS.DynamoDB.DocumentClient()
-Promise.promisifyAll( db )
 
 var exports = {}
 
@@ -24,7 +23,7 @@ exports.delete = function( table, key ) {
         Key: key
     }
 
-    return  db.deleteAsync( params )
+    return  db.delete( params ).promise()
 }
 
 exports.get = function(table, key) {
@@ -34,19 +33,19 @@ exports.get = function(table, key) {
     }
 
     return new Promise(function (resolve, reject) {
-        db.getAsync(params).then(function (result) {
+        db.get(params).promise().then(function (result) {
             resolve(result.Item)
         }, reject)
     })
 }
 
 exports.scan = function( params ) {
-    return  db.scanAsync( params )
+    return  db.scan( params ).promise()
 }
 
 exports.query = function( params ) {
     return new Promise(function (resolve, reject) {
-        db.queryAsync( params ).then(function (result) {
+        db.query( params ).promise().then(function (result) {
             resolve(result.Items)
         }, reject)
     })
